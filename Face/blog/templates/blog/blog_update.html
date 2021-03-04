@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+{% block title %}- Update {% endblock %}
+{% load crispy_forms_tags %}
+{% block contents %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+        <form action="" method="post" enctype="multipart/form-data">
+                {{ form|crispy }}
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Update">
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+{% endblock %}

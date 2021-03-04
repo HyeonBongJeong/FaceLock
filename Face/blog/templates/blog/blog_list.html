@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %}
+
+{% block contents %}
+
+<div class="row">
+
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+            <h2>당신의 파일을 저장하세요!</h2>
+                <p>
+                    <a href="{% url 'blog:upload_blog' %}" class="btn btn-primary">
+                       파일올리기
+                    </a>
+                </p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>title</th>
+            <th>author</th>
+            <th>download</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for blog in posts %}
+        <tr>
+            <td>{{ blog.title }}</td>
+            <td>{{ blog.author }}</td>
+            <td><a href="{{ blog.file.url }}" download class="btn btn-primary btn-sm" >내려받기</a></td>
+            <td>
+            <a href="{% url 'blog:update' pk=blog.id%}" >수정</a>&emsp;
+            <a href="{% url 'blog:delete' pk=blog.id%}" >삭제</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+
+
+      <nav class="blog-pagination justify-content-center d-flex" style="padding: 2.5% 0 ;">
+        <ul class="pagination">
+		  {% if posts.has_previous %}
+          <li class="page-item">
+            <a href="?page={{posts.number|add:-1}}" class="page-link" aria-label="Previous">
+              <span aria-hidden="true">
+                <i class="ti-angle-left"></i>
+              </span>
+            </a>
+          </li>
+		  {% endif %}
+          <li class="page-item"><a href="?page={{posts.number}}" class="page-link">{{posts.number}}</a></li>
+		  {% if posts.has_next %}
+          <li class="page-item">
+            <a href="?page={{posts.number|add:+1}}" class="page-link" aria-label="Next">
+              <span aria-hidden="true">
+                <i class="ti-angle-right"></i>
+              </span>
+            </a>
+          </li>
+		  {% endif %}
+        </ul>
+      </nav>
+      <div class="col-md-12 text-right">
+        {% if error %}
+    <p style="color:red;">{{error}}</p>
+    {%endif%}
+      </div>
+      </form>
+    </div>
+    </div>
+    </div>
+{% endblock %}

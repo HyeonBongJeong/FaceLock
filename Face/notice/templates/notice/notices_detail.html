@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+{% block contents %}
+
+    <!--================Home Banner Area : 이 아래부분은 수정한 부분입니다!=================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="banner_content text-center">
+                <h2>NOTICE</h2>
+                <div class="page_link">
+                  <p>공지사항</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Contact Area  : 이 아래부분은 수정한 부분입니다!=================-->
+    <section class="contact_area section_gap" style="padding: 6% 0 10% 0;">
+      <div class="container">
+        <div class="row">
+          <div class="section">
+            <div class="b_area">
+              <table class="col-12">
+                <colgroup>
+                  <col width="130">
+                  <col width="390">
+                  <col width="130">
+                  <col width="80">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <td style="background: #f1f4f7;font-weight: bold; font-size: 14px; text-align: center; padding: 1%;">
+                   		   제&nbsp;&nbsp;목</td>
+                    <td colspan="3" class="t_al2"> &nbsp;<b>{{object.notice_title}}</b></td>
+                  </tr>
+                  <tr>
+                    <td class="t_bc2 t_b0"
+                      style="background: #f1f4f7;font-weight: bold; font-size: 14px; text-align: center;padding: 1%; ">등록일
+                    </td>
+                    <td class="t_al2 t_b0">&nbsp; {{object.notice_date}}</td>
+                  </tr>
+                </tbody>
+              </table >
+              <p class="t_inf"></p>
+              <div class="text_area" style="padding: 2% 2% 10% 2%;">
+
+                <!-- 내용 출력 -->
+                <div class="col"></div>
+                <div class="content col-12">
+                  {{object.notice_text}}
+                  <div class="col"></div>
+                </div>
+              </div>
+              <div class="br"></div>
+
+
+              <table class="col-12" cellpadding="0" style="padding: 5%; ">
+                <colgroup>
+                  <col width="130">
+                  <col width="600">
+                </colgroup>
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+{% endblock contents %}

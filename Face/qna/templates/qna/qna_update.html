@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block contents %}
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="banner_content text-center">
+                <h2>Q&A</h2>
+                <div class="page_link">
+                  <p>질문게시판</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Contact Area =================-->
+    <section class="contact_area section_gap" style="padding: 6% 0 10% 0;">
+      <div class="container">
+                    <form action="" method="post">
+            {% csrf_token %}
+           {{ form|crispy }}
+     	<input type="submit" class="btn btn-primary" value="수정">
+</form>
+
+      </div>
+    </section>
+
+
+{% endblock contents %}

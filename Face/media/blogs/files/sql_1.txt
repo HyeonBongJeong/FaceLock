@@ -1,0 +1,280 @@
+CREATE TABLE member (
+	ID	varchar2(15)	NOT NULL,
+	care_no	varchar2(10)	NULL,
+	name	varchar2(15)	NOT NULL,
+	password	varchar2(20)	NOT NULL,
+	phone	varchar2(20)	NOT NULL,
+	email	varchar2(50)	NOT NULL,
+	favorite	varchar2(50)	NULL,
+	grade	char(1)	NOT NULL,
+	lev	char(1)	NOT NULL,
+	status	char(1)	NOT NULL,
+	sign_date	date	NOT NULL,
+	birthday	date	NOT NULL
+);
+
+CREATE TABLE notice (
+	notice_no	number	NOT NULL,
+	ID	varchar2(15)	NOT NULL,
+	notice_count	number	NOT NULL,
+	notice_title	varchar2(100)	NOT NULL,
+	notice_contents	varchar2(2000)	NOT NULL,
+	notive_write_date	date	NOT NULL,
+	notice_img	varchar2(1000)	NULL
+);
+
+CREATE TABLE qna (
+	qna_no	number	NOT NULL,
+	ID	varchar2(15)	NOT NULL,
+	Qna_title	varchar2(100)	NOT NULL,
+	Qna_contents	varchar2(2000)	NOT NULL,
+	Qna_statrment	char(1)	NULL,
+	Qna_pass	char(4)	NULL,
+	Qna_count	number	NOT NULL,
+	qna_write_date	date	NOT NULL,
+	qna_img	blob	NULL,
+	ref	number	NULL,
+	ref_step	number	NULL,
+	ref_level	number	NULL
+);
+
+CREATE TABLE adopt (
+	adpt_no	number	NOT NULL,
+	ID	varchar2(15)	NULL,
+	adpt_title	varchar2(100)	NOT NULL,
+	adpt_contents	varchar2(2000)	NOT NULL,
+	adpt_count	number	NOT NULL,
+	qna_write_date	date	NOT NULL,
+	adpt_img	varchar2(1000)	NULL,
+	ref	number	NULL,
+	ref_step	number	NULL,
+	ref_level	number	NULL
+);
+
+CREATE TABLE training (
+	trn_no	number	NOT NULL,
+	ID	varchar2(15)	NULL,
+	trn_title	varchar2(100) not null	NOT NULL,
+	content	varchar2(2000) not null	NOT NULL,
+	count	number	NULL,
+	write_date	date not null	NOT NULL,
+	media	varchar2(1000)	NULL
+);
+
+CREATE TABLE quiz (
+	quiz_no	number	NOT NULL,
+	ID	varchar2(15)	NULL,
+	qulz_content	varchar2(100) not null	NOT NULL,
+	answer	varchar2(100) not null	NOT NULL
+);
+
+CREATE TABLE care (
+	care_no	varchar(20)	NULL,
+	care_name	varchar2(50)	NULL,
+	adress	varchar2(200)	NULL,
+	tel	varchar2(20)	NULL,
+	closeday	varchar2(20)	NULL,
+	week_open	varchar2(20)	NULL,
+	week_close	varchar2(20)	NULL,
+	weekend_close	varchar2(20)	NULL,
+	weekend_open	varchar2(20)	NULL,
+	week_adopt_str	varchar2(20)	NULL,
+	week_adopt_end	varchar2(20)	NULL,
+	weekend_adopt_str	varchar2(20)	NULL,
+	weekeen_adopt_end	varchar2(20)	NULL
+);
+
+CREATE TABLE reservation (
+	resercation_no	char(6)	NOT NULL,
+	dog_no	varchar2(20)	NULL,
+	ID	varchar2(15)	NOT NULL,
+	care_no2	varchar2(10)	NULL,
+	reservation_date	varchar2(20)	NULL
+);
+
+CREATE TABLE resque (
+	req_no	number	NOT NULL,
+	ID	varchar2(15)	NULL,
+	req_title	varchar2(100) not null	NOT NULL,
+	req_contents	varchar2(2000) not null	NOT NULL,
+	req_count	number	NULL,
+	req_write_date	date not null	NOT NULL,
+	req_img	varchar2(1000)	NULL,
+	ref	number	NULL,
+	ref_step	number	NULL,
+	ref_level	number	NULL
+);
+
+CREATE TABLE warning (
+	wno	number	NOT NULL,
+	qna_no	number	NOT NULL,
+	ID	varchar2(15)	NOT NULL,
+	wcontent	varchar(1000)	NOT NULL
+);
+
+CREATE TABLE dog (
+	dog_no	varchar2(20)	NULL,
+	care_no	varchar2(20)	NULL,
+	dog_img	varchar2(200)	NULL,
+	notice_date	varchar2(10)	NULL,
+	find_place	varchar2(200)	NULL,
+	kind	varchar2(100)	NULL,
+	age	varchar2(30)	NULL,
+	weight	varchar2(10)	NULL,
+	str_notice	Date	NULL,
+	end_notice	Date	NULL,
+	dog_big_img	varchar2(200)	NULL,
+	status	char(1)	NULL,
+	gender	char(1)	NULL,
+	surgery	char(1)	NULL,
+	specialMark	varchar2(200)	NULL
+);
+
+ALTER TABLE member ADD CONSTRAINT PK_MEMBER PRIMARY KEY (
+	ID,
+	care_no
+);
+
+ALTER TABLE notice ADD CONSTRAINT PK_NOTICE PRIMARY KEY (
+	notice_no,
+	ID
+);
+
+ALTER TABLE qna ADD CONSTRAINT PK_QNA PRIMARY KEY (
+	qna_no,
+	ID
+);
+
+ALTER TABLE adopt ADD CONSTRAINT PK_ADOPT PRIMARY KEY (
+	adpt_no,
+	ID
+);
+
+ALTER TABLE training ADD CONSTRAINT PK_TRAINING PRIMARY KEY (
+	trn_no,
+	ID
+);
+
+ALTER TABLE quiz ADD CONSTRAINT PK_QUIZ PRIMARY KEY (
+	quiz_no,
+	ID
+);
+
+ALTER TABLE care ADD CONSTRAINT PK_CARE PRIMARY KEY (
+	care_no
+);
+
+ALTER TABLE reservation ADD CONSTRAINT PK_RESERVATION PRIMARY KEY (
+	resercation_no,
+	dog_no,
+	ID,
+	care_no2
+);
+
+ALTER TABLE resque ADD CONSTRAINT PK_RESQUE PRIMARY KEY (
+	req_no,
+	ID
+);
+
+ALTER TABLE warning ADD CONSTRAINT PK_WARNING PRIMARY KEY (
+	wno,
+	qna_no,
+	ID
+);
+
+ALTER TABLE dog ADD CONSTRAINT PK_DOG PRIMARY KEY (
+	dog_no,
+	care_no
+);
+
+ALTER TABLE member ADD CONSTRAINT FK_care_TO_member_1 FOREIGN KEY (
+	care_no
+)
+REFERENCES care (
+	care_no
+);
+
+ALTER TABLE notice ADD CONSTRAINT FK_member_TO_notice_1 FOREIGN KEY (
+	ID
+)
+REFERENCES member (
+	ID
+);
+
+ALTER TABLE qna ADD CONSTRAINT FK_member_TO_qna_1 FOREIGN KEY (
+	ID
+)
+REFERENCES member (
+	ID
+);
+
+ALTER TABLE adopt ADD CONSTRAINT FK_member_TO_adopt_1 FOREIGN KEY (
+	ID
+)
+REFERENCES member (
+	ID
+);
+
+ALTER TABLE training ADD CONSTRAINT FK_member_TO_training_1 FOREIGN KEY (
+	ID
+)
+REFERENCES member (
+	ID
+);
+
+ALTER TABLE quiz ADD CONSTRAINT FK_member_TO_quiz_1 FOREIGN KEY (
+	ID
+)
+REFERENCES member (
+	ID
+);
+
+ALTER TABLE reservation ADD CONSTRAINT FK_dog_TO_reservation_1 FOREIGN KEY (
+	dog_no
+)
+REFERENCES dog (
+	dog_no
+);
+
+ALTER TABLE reservation ADD CONSTRAINT FK_member_TO_reservation_1 FOREIGN KEY (
+	ID
+)
+REFERENCES member (
+	ID
+);
+
+ALTER TABLE reservation ADD CONSTRAINT FK_member_TO_reservation_2 FOREIGN KEY (
+	care_no2
+)
+REFERENCES member (
+	care_no
+);
+
+ALTER TABLE resque ADD CONSTRAINT FK_member_TO_resque_1 FOREIGN KEY (
+	ID
+)
+REFERENCES member (
+	ID
+);
+
+ALTER TABLE warning ADD CONSTRAINT FK_qna_TO_warning_1 FOREIGN KEY (
+	qna_no
+)
+REFERENCES qna (
+	qna_no
+);
+
+ALTER TABLE warning ADD CONSTRAINT FK_qna_TO_warning_2 FOREIGN KEY (
+	ID
+)
+REFERENCES qna (
+	ID
+);
+
+ALTER TABLE dog ADD CONSTRAINT FK_care_TO_dog_1 FOREIGN KEY (
+	care_no
+)
+REFERENCES care (
+	care_no
+);
+

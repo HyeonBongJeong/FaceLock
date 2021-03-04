@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>로그인</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<!<link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+<!--================"C:/Users/GangNangYee/Desktop/Login_v9/login"===============================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+<!--=================================================-->
+</head>
+
+<script type="text/javascript">
+function find_id(){
+    var url = "{% url 'account:findId' %}";
+    var name = "find_id";
+    var option = "width = 350, height = 475, top = 100, left = 200, location = no"
+    window.open(url, name, option);
+}
+
+function find_pwd(){
+    var url = "{% url 'account:findPwd' %}";
+    var name = "find_pwd";
+    var option = "width = 350, height = 575, top = 100, left = 200, location = no"
+    window.open(url, name, option);
+}
+</script>
+
+<body>
+	
+	
+	<div class="container-login100">
+		<div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+			<form class="login100-form validate-form" action="{% url 'account:login' %}" method="POST">
+				{% csrf_token %}
+				<span class="login100-form-title p-b-37">
+					로그인
+				</span>
+
+
+                       <div class="form-group">
+						{{form.as_p}}
+                       </div>
+
+
+
+
+				<div class="container-login100-form-btn">
+				<input type = 'submit' value="로그인" class="btn btn-primary">
+				</div>
+				
+				<div class="text-center p-t-57 p-b-20">
+					<input class ="txt3" type="button" value="아이디 찾기/" onclick="find_id()">
+					<input class ="txt3" type="button" value="비밀번호 찾기/" onclick="find_pwd()">
+					<a type="button" class="txt3" value="회원가입" href="{% url 'account:register' %}">회원가입</a>
+				</div>
+
+			</form>
+		</div>
+	</div>
+	
+	
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/js/main.js' %}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+
+{% extends 'main/base.html' %}
+{% block contents %}
+
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="banner_content text-center">
+                <h2>MyPage</h2>
+                <div class="page_link">
+                  <a href="{% url 'main:index' %}">Home</a>
+                  <a href="#">Mypage</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Blog Area =================-->
+    <section class="blog_area single-post-area section_gap_little">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="blog_right_sidebar">
+
+                        <aside class="single_sidebar_widget post_category_widget">
+
+                          <ul class="nav nav-tabs list cat-list" style="display: block;">
+                              <li>
+                                  <a data-toggle="tab" href="#my-info" class="d-flex justify-content-between active">
+                                      <h4>내 정보</h4>
+                                  </a>
+                              </li>
+                          </ul>
+                      </aside>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-9 posts-list">
+                    <div class="single-post row">
+                          {% if profile_user.username %}
+                            <div class="tab-content quotes" style="width: 100%;">
+                                <div id="my-info" class="tab-pane fade in active show">
+                                  <h2>내 정보</h2>
+                                  <hr>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <small class="input-sm-label">name</small>
+                                            <p class="single-input-primary">{{profile_user.username}}</p>
+                                            <small class="input-sm-label">email</small>
+                                               <p class="single-input-primary">{{profile_user.email}}</p>
+                                             <small class="input-sm-label">성</small>
+                                               <p class="single-input-primary">{{profile_user.last_name}}</p>
+                                             <small class="input-sm-label">이름</small>
+                                               <p class="single-input-primary">{{profile_user.first_name}}</p>
+                                            <br>
+                                            <a class="primary-btn" href="{% url 'main:change_password' %}">
+                                                Change Password
+                                            </a>
+                                             {% endif %}
+
+
+
+
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                    </div>    
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!--================Blog Area =================-->
+
+ {% endblock contents %}

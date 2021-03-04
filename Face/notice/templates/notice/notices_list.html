@@ -1,0 +1,111 @@
+{% extends 'main/base.html' %}
+{% block contents %}
+
+
+
+  <!--================Home Banner Area : 이 아래영역은 수정한 부분입니다!=================-->
+  <section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="banner_content text-center">
+              <h2>NOTICE</h2>
+              <div class="page_link">
+                <p>공지사항</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Home Banner Area =================-->
+
+  <!--================Contact Area : 이 아래 영역은 수정한 부분입니다!= =================-->
+  <section class="contact_area section_gap" style="padding: 5% 0;">
+    <div class="container">
+      <div class="row">
+        <table class="table"style="text-align:center;">
+          <thead>
+            <tr>
+              <th scope="col">글번호</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성일</th>
+              <th scope="col">관리자</th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for notices in object_list %}
+           <tr>
+
+                <th scope="row">{{forloop.counter}}</th>
+                <td>
+                  <a href="{% url 'notice:Detail' pk=notices.id %}">{{ notices.notice_title}}
+                  </a>
+                </td>
+                <td>{{ notices.notice_date }}</td>
+                <td>사이트관리자</td>
+
+            </tr>
+            {%endfor%}
+
+          </tbody>
+        </table>
+        </div>
+
+
+      <nav class="blog-pagination justify-content-center d-flex" style="padding: 2.5% 0 ;">
+        <ul class="pagination">
+        {% if page_obj.has_previous %}
+		<a href="?page={{page_obj.previous_page_number}}">Previous</a>
+		{% endif %}
+		Page {{page_obj.number}} / {{page_obj.paginator.num_pages}}
+		{% if page_obj.has_next %}
+		<a href="?page={{page_obj.next_page_number}}">Next</a>
+		{% endif %}
+        </ul>
+      </nav>
+
+    </div>
+  </section>
+  <!--================Contact Area =================-->
+
+  <!--================ start footer Area  =================-->
+
+  <!--================ End footer Area  =================-->
+
+  <!--================Contact Success and Error message Area =================-->
+  <div id="success" class="modal modal-message fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="ti-close"></i>
+          </button>
+          <h2>Thank you</h2>
+          <p>Your message is successfully sent...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals error -->
+
+  <div id="error" class="modal modal-message fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="ti-close"></i>
+          </button>
+          <h2>Sorry !</h2>
+          <p>Something went wrong</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--================End Contact Success and Error message Area =================-->
+
+ {% endblock contents %}

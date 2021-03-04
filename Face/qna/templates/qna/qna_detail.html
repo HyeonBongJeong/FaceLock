@@ -1,0 +1,113 @@
+{% extends 'main/base.html' %}
+{% block contents %}
+
+    <!--================Home Banner Area : 이 아래부분은 수정한 부분입니다!=================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="banner_content text-center">
+                <h2>QnA</h2>
+                <div class="page_link">
+                  <p>질문게시판</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Contact Area  : 이 아래부분은 수정한 부분입니다!=================-->
+    <section class="contact_area section_gap" style="padding: 6% 0 10% 0;">
+      <div class="container">
+        <div class="row">
+          <div class="section">
+            <div class="b_area">
+              <table class="col-12">
+                <colgroup>
+                  <col width="130">
+                  <col width="390">
+                  <col width="130">
+                  <col width="80">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <td style="background: #f1f4f7;font-weight: bold; font-size: 14px; text-align: center; padding: 1%;">
+                   		   제&nbsp;&nbsp;목</td>
+                    <td colspan="3" class="t_al2"> &nbsp;{{object.q_title}}</td>
+                  </tr>
+                  <tr>
+                    <td class="t_bc2 t_b0"
+                      style="background: #f1f4f7;font-weight: bold; font-size: 14px; text-align: center;padding: 1%; ">등록일
+                    </td>
+                    <td class="t_al2 t_b0" >&nbsp;{{object.q_date}}</td>
+                  </tr>
+                  <tr>
+                    <td style="background: #f1f4f7;font-weight: bold; font-size: 14px; text-align: center; padding: 1%;">
+                   		 작성자</td>
+                    <td colspan="3" class="t_al2"> &nbsp;{{object.member}}</td>
+                  </tr>
+                </tbody>
+              </table >
+              <p class="t_inf"></p>
+              <div class="text_area" style="padding: 2% 2% 10% 2%;">
+
+                <!-- 내용 출력 -->
+                <div class="col"></div>
+                <div class="content col-12">
+                  {{object.q_data}}
+                  <div class="col"></div>
+                </div>
+              </div>
+              <div class="br"></div>
+                <a href="{% url 'qna:List' %}">목록으로</a>
+                <div class="row" style="padding: 5% 2% 2% 2%;">
+                  {% if user.is_authenticated %}
+                  {% if qna.member == user %}
+                  <a href="{% url 'qna:update' pk=qna.id%}" class="btn btn-primary">수정</a>&emsp;
+                  {% endif %}
+                  {% endif %}
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">삭제</button>
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'qna:delete' pk=qna.id%}" method="post">
+        {% csrf_token %}
+        <div>삭제 하시겠습니까?"{{object}}"</div>
+          <input type="submit" class="btn btn-primary" value="예 하겠습니다.">
+          <input type="reset" class="btn btn-secondary" data-dismiss="modal" value="아니요 취소힐래요">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 panel panel-default">
+                {% load disqus_tags %}
+                {% disqus_show_comments %}
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+      {% endif %}
+    </section>
+{% endblock contents %}
